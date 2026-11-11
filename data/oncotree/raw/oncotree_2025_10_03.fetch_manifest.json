@@ -1,0 +1,9 @@
+{
+  "alias_used_at_fetch": "oncotree_latest_stable",
+  "resolved_version": "oncotree_2025_10_03",
+  "source_url": "https://oncotree.mskcc.org/api/tumorTypes?version=oncotree_2025_10_03",
+  "fetched_at": "2026-05-13T12:21:03+00:00",
+  "raw_json_path": "data/oncotree/raw/oncotree_2025_10_03.json",
+  "raw_json_sha256": "52ea49c71cc292d7051565330ae56d84a70ada8088b346d85d35c112fbfeb209",
+  "note": "Pin manifest sidecar for the raw OncoTree dump. Written once at fetch time so that subsequent rebuilds of data/oncotree/roster_v1.yaml are deterministic. To refresh: see the 'Re-fetching' section in scripts/build_oncotree_roster.py."
+}

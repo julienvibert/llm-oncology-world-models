@@ -1,0 +1,163 @@
+# Sentinel Reasoning Benchmark — machine-readable spec v1
+# The scoring harness (score_sentinel_benchmark.py) consumes this.
+# Each context scores ONE durable primitive; arms carry a class; expected_signs are
+# pre-registered pairwise "better > worse" orderings on imagined survival.
+# core_signal: direction | biomarker_flip | history_delta | host_intensity
+# bsc_suspended: true  -> "BSC last" is NOT scored (host-frailty contexts)
+# seeds: real GENIE seed record_ids present in a run (empty = needs generation)
+version: 1
+
+contexts:
+  # ---- direction contexts with dry-run data (the existing 6-seed screener) ----
+  EGFR_1L:
+    label: "EGFR-mut LUAD, 1L"
+    core_signal: direction
+    soc: osimertinib
+    bsc: supportive
+    bsc_suspended: false
+    arms: {osimertinib: soc, pembrolizumab: weak_io, supportive: bsc}
+    expected_signs: [[osimertinib, pembrolizumab], [osimertinib, supportive], [pembrolizumab, supportive]]
+    seeds: [GENIE-REDACTED-01, GENIE-REDACTED-02]
+    flip_pair_with: EGFR_WT_1L        # biomarker Δ (needs 1b generation)
+
+  ALK_1L:
+    label: "ALK+ LUAD, 1L"
+    core_signal: direction
+    soc: alectinib
+    bsc: supportive
+    bsc_suspended: false
+    arms: {alectinib: soc, pembrolizumab: weak_io, supportive: bsc}
+    expected_signs: [[alectinib, pembrolizumab], [alectinib, supportive], [pembrolizumab, supportive]]
+    seeds: [GENIE-REDACTED-03, GENIE-REDACTED-04]
+
+  nodriver_1L:
+    label: "Driver-neg LUAD (chemo-IO vs chemo)"
+    core_signal: direction
+    soc: chemo_io
+    bsc: null
+    bsc_suspended: false
+    arms: {chemo_io: soc, carbo_pem: weak_chemo}
+    expected_signs: [[chemo_io, carbo_pem]]
+    seeds: [GENIE-REDACTED-05, GENIE-REDACTED-06]
+
+  PDL1_high_1L:
+    label: "Driver-neg PD-L1-high LUAD, 1L (IO is SoC)"
+    core_signal: direction
+    soc: pembrolizumab      # pembro monotherapy AND chemo-IO are both acceptable 1L (two attractors)
+    two_attractor: [pembrolizumab, chemo_io]
+    bsc: supportive
+    bsc_suspended: false
+    arms: {pembrolizumab: soc, chemo_io: strong_alt, chemo: weak_chemo, supportive: bsc}
+    expected_signs: [[pembrolizumab, chemo], [chemo_io, chemo], [chemo, supportive]]  # IO-containing > chemo alone
+    seeds: []
+
+  # ---- remaining contexts: full spec, seeds empty until the battery is generated ----
+  EGFR_WT_1L:
+    label: "EGFR-WT LUAD, 1L (flip of EGFR_1L)"
+    core_signal: biomarker_flip
+    soc: chemo
+    bsc: supportive
+    bsc_suspended: false
+    arms: {osimertinib: wrong_target, chemo: soc, supportive: bsc}
+    expected_signs: [[chemo, osimertinib], [chemo, supportive]]  # osimertinib (no target) must NOT beat chemo
+    not_top: [osimertinib]                    # wrong-target arm must not rank first
+    flip_pair_with: EGFR_1L
+    seeds: []
+
+  MSI_H_CRC:
+    label: "MSI-H mCRC"
+    core_signal: direction
+    soc: pembrolizumab
+    bsc: supportive
+    bsc_suspended: false
+    arms: {pembrolizumab: soc, chemo: weak_chemo, cetuximab: wrong_target, supportive: bsc}
+    expected_signs: [[pembrolizumab, chemo], [pembrolizumab, supportive], [chemo, supportive]]
+    flip_pair_with: MSS_RAS_CRC
+    seeds: []
+
+  MSS_RAS_CRC:
+    label: "MSS/RAS-mut mCRC (flip of MSI_H_CRC)"
+    core_signal: biomarker_flip
+    soc: chemo_bev
+    bsc: supportive
+    bsc_suspended: false
+    arms: {chemo_bev: soc, pembrolizumab: wrong_here, cetuximab: wrong_target, supportive: bsc}
+    expected_signs: [[chemo_bev, pembrolizumab], [chemo_bev, cetuximab], [chemo_bev, supportive]]  # IO & anti-EGFR wrong here
+    not_top: [pembrolizumab, cetuximab]
+    flip_pair_with: MSI_H_CRC
+    seeds: []
+
+  BRAF_melanoma:
+    label: "BRAF-V600E melanoma (two attractors)"
+    core_signal: direction
+    soc: braf_mek           # both braf_mek AND io_combo must beat chemo
+    bsc: supportive
+    bsc_suspended: false
+    arms: {braf_mek: soc, io_combo: soc, chemo: weak_chemo, supportive: bsc}
+    expected_signs: [[braf_mek, chemo], [io_combo, chemo], [chemo, supportive]]
+    two_attractor: [braf_mek, io_combo]
+    seeds: []
+
+  HER2_pos_breast:
+    label: "HER2+ breast"
+    core_signal: direction
+    soc: her2_chemo
+    bsc: supportive
+    bsc_suspended: false
+    arms: {her2_chemo: soc, chemo: weak_chemo, endocrine: weak, supportive: bsc}
+    expected_signs: [[her2_chemo, chemo], [her2_chemo, supportive]]
+    flip_pair_with: HER2_neg_breast
+    seeds: []
+
+  HER2_neg_breast:
+    label: "HER2-neg breast (flip of HER2_pos_breast)"
+    core_signal: biomarker_flip
+    soc: endocrine            # HR+/HER2-neg: proper 1L comparator is endocrine +/- CDK4/6, not chemo alone
+    bsc: supportive
+    bsc_suspended: false
+    arms: {her2_chemo: wrong_target, endocrine: soc, chemo: weak_chemo, supportive: bsc}
+    expected_signs: [[endocrine, her2_chemo], [endocrine, supportive]]  # trastuzumab (wrong target) must NOT beat endocrine
+    not_top: [her2_chemo]
+    flip_pair_with: HER2_pos_breast
+    seeds: []
+
+  ccRCC:
+    label: "Clear-cell RCC"
+    core_signal: direction
+    soc: io_tki
+    bsc: supportive
+    bsc_suspended: false
+    arms: {io_tki: soc, tki: weak, cytotoxic_chemo: wrong_here, supportive: bsc}
+    expected_signs: [[io_tki, cytotoxic_chemo], [io_tki, supportive]]  # cytotoxic NOT scored as clearly > BSC in RCC
+    not_top: [cytotoxic_chemo]                # cytotoxic must not rank first
+    seeds: []
+
+  HGSOC_relapse:            # DYNAMIC — scored by within-seed platinum Δ across seeds
+    label: "HGSOC relapse: platinum-sensitive vs resistant"
+    core_signal: history_delta
+    seed_variants:
+      sensitive: {platinum: helps}     # platinum should rank high
+      resistant: {platinum: not_top}   # platinum must NOT rank top
+    delta_arm: platinum
+    arms: {platinum: variable, non_platinum: alt, parp: conditional_brca_hrd, supportive: bsc}
+    seeds: []
+
+  pancreas_fit_frail:       # DYNAMIC — scored host-appropriate intensity WITHIN host state
+    label: "Pancreatic adeno: fit vs frail"
+    core_signal: host_intensity
+    seed_variants:
+      fit:   {folfirinox: acceptable_top, bsc_suspended: false}
+      frail: {folfirinox: must_not_top,   bsc_suspended: true}   # BSC legitimate here
+    intensive_arm: folfirinox
+    arms: {folfirinox: intensive, gem_nab: moderate, gem: gentle, supportive: bsc}
+    seeds: []
+
+  EGFR_post_progression:    # DYNAMIC/history — GENIE-validatable
+    label: "EGFR-mut LUAD post-progression on osimertinib"
+    core_signal: history_delta
+    soc: chemo               # switch
+    bsc: supportive
+    bsc_suspended: false
+    arms: {chemo: soc, continue_osi: wrong_setting, supportive: bsc}
+    expected_signs: [[chemo, continue_osi], [chemo, supportive]]
+    seeds: []

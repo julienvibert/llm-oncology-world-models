@@ -1,0 +1,116 @@
+{
+  "baseline_id": "her2_brca_002",
+  "identity_card": {
+    "demographics": {
+      "age_at_diagnosis": 62,
+      "sex": "female",
+      "ecog_ps_at_diagnosis": 0
+    },
+    "diagnosis": {
+      "diagnosis_date": "2024-01-15",
+      "oncotree_code": "BRCA",
+      "histology_class": "invasive_ductal",
+      "histology_bucket": "ductal_carcinoma",
+      "primary_site": "right_breast",
+      "primary_site_class": "breast",
+      "histology_description": "Invasive ductal carcinoma"
+    },
+    "staging": {
+      "stage_class": "metastatic",
+      "formal_stage": {
+        "system": "ajcc_tnm_8",
+        "group_label": "IV",
+        "tnm": {"T": "T2", "N": "N0", "M": "M1"},
+        "components": {}
+      }
+    },
+    "molecular_profile": {
+      "primary_driver_bucket": "erbb2_her2",
+      "alterations": [
+        {
+          "gene": "ERBB2",
+          "alteration_type": "amplification",
+          "alteration": "ERBB2 amplification",
+          "variant": null,
+          "driver_bucket": "erbb2_her2",
+          "actionability": "standard_of_care",
+          "is_primary_driver": true
+        },
+        {
+          "gene": "PIK3CA",
+          "alteration_type": "mutation",
+          "alteration": "PIK3CA H1047R",
+          "variant": "H1047R",
+          "driver_bucket": "pik3ca_pi3k_akt",
+          "actionability": "guideline_relevant",
+          "is_primary_driver": false
+        }
+      ],
+      "biomarkers": [
+        {"name": "ER", "value": "20%"},
+        {"name": "PR", "value": "5%"},
+        {"name": "HER2 IHC", "value": "3+"},
+        {"name": "HER2 FISH", "value": "amplified"},
+        {"name": "Ki-67", "value": "30%"}
+      ]
+    },
+    "baseline_health": {
+      "renal": "normal",
+      "hepatic": "normal",
+      "cardiac": "normal",
+      "marrow_reserve": "normal",
+      "pulmonary": "normal",
+      "contraindications": [],
+      "frailty_band": "fit",
+      "autoimmune_disease_history": false,
+      "neuropathy_at_baseline": "grade_1"
+    }
+  },
+  "clone_registry": [
+    {
+      "clone_id": "C0",
+      "clone_role": "founder",
+      "drivers": ["ERBB2_amplification", "PIK3CA_H1047R"],
+      "first_presence_date": "2024-01-15"
+    }
+  ],
+  "baseline_disease_burden": [
+    {
+      "clone": "C0",
+      "site": "right_breast",
+      "site_class": "primary_site",
+      "burden": "moderate",
+      "kinetic": "stable"
+    },
+    {
+      "clone": "C0",
+      "site": "bone",
+      "site_class": "bone",
+      "burden": "small",
+      "kinetic": "growing"
+    }
+  ],
+  "baseline_patient_state": {
+    "weight_kg": 70,
+    "symptom_burden": "none"
+  },
+  "medical_history": {
+    "comorbidities": [
+      {
+        "category": "cardiovascular",
+        "term": "hypertension",
+        "status": "controlled"
+      },
+      {
+        "category": "metabolic_endocrine",
+        "term": "type_2_diabetes_mellitus",
+        "status": "controlled"
+      }
+    ],
+    "smoking_status": "former",
+    "tobacco_exposure_band": "light",
+    "pack_years": 7.5,
+    "family_history": [],
+    "contextual_factors": []
+  }
+}

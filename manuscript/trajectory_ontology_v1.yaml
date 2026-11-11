@@ -1,0 +1,209 @@
+schema_version: 1
+config_id: trajectory_ontology_v1
+status: FROZEN FOR THE HOLISTIC GENIE LADDER
+date: "2026-08-20"
+
+purpose: >
+  One registry separating the CONDITIONING SPACE (what defines the patient and the requested
+  population before the decision) from the TRAJECTORY SPACE (what the future course
+  contains), with every trajectory primitive assigned to exactly one domain-by-property cell
+  and its observability declared per dataset. The matrix is SPARSE by design: a cell is
+  structurally_empty when filling it would duplicate another primitive, and not_observed
+  when it is clinically meaningful but the dataset cannot record it. Those are different
+  facts and are never conflated. Missing dimensions are marked, never encoded as zero.
+
+history_is_conditioning: >
+  H is a conditioning layer, not a future domain. Future history accumulates from the
+  cancer, host and treatment events already represented in the path; encoding it again as an
+  outcome block would double-count the sequence. Functionals of the accumulated prefix
+  remain legitimate PREDICTORS (the prefix-temporal-phenotype results depend on them); they
+  are not outcome coordinates.
+
+# =======================================================================================
+# CONDITIONING SPACE — pre-decision only. Defines patients-like-me, support, the
+# precision ladder, and which coordinate a C/X/H/A experiment perturbs. NEVER uses a
+# neighbour's future outcomes at query time; any outcome-informed retrieval POLICY (for
+# example, which coordinates define homogeneous futures) is learned on discovery patients
+# only and frozen before it serves any evaluated query.
+# =======================================================================================
+
+conditioning:
+  cancer:        {layer: conditioning, source: C, genie: observed, prime: observed, atlas: specified}
+  stage_iv:      {layer: conditioning, source: C, genie: observed, prime: observed, atlas: specified}
+  biomarkers:    {layer: conditioning, source: C, genie: partial_panel, prime: KRAS_only, atlas: specified}
+  n_disease_sites: {layer: conditioning, source: X, genie: observed, prime: observed, atlas: specified}
+  organ_sites:   {layer: conditioning, source: X, genie: observed_coarse, prime: observed, atlas: specified}
+  age_at_start:  {layer: conditioning, source: X, genie: observed, prime: observed, atlas: specified}
+  ecog:          {layer: conditioning, source: X, genie: not_observed, prime: observed_baseline, atlas: specified}
+  line_number:   {layer: conditioning, source: H, genie: observed, prime: first_line_trial, atlas: specified}
+  months_on_prior_line: {layer: conditioning, source: H, genie: observed, prime: not_applicable, atlas: specified}
+  prior_progressions:   {layer: conditioning, source: H, genie: observed, prime: not_applicable, atlas: specified}
+  action:        {layer: conditioning, source: A, genie: observed_regimen, prime: randomised, atlas: specified}
+
+# =======================================================================================
+# TRAJECTORY SPACE — the domain x property matrix, SPARSE. Every primitive has exactly one
+# home; degenerate cells are declared, not silently filled.
+# =======================================================================================
+
+trajectory:
+  cancer_domain:
+    clock:
+      primitives: [first_progression_months, first_response_months]
+      home: clock_block
+      genie: observed        # imaging-confirmed
+      prime: observed        # lesion measurements
+      atlas: generated
+    occupancy:
+      primitives: [responding_state_monthly]
+      note: >
+        The ONE course-state occupancy that is not a deterministic function of the clock.
+        Progression-free time is structurally_empty here: it is the progression clock
+        redrawn as a step function, and filling it re-creates the double count removed at
+        commit 64896f2.
+      structurally_empty: [progression_free_monthly]
+      genie: observed
+      prime: observed
+      atlas: generated
+    richness:
+      primitives: [n_progressions_sqrt, n_responses_sqrt]
+      deduplication: episode window 1.0 month, never across a treatment event
+      genie: observed
+      prime: observed
+      atlas: generated
+    grammar:
+      note: >
+        SECONDARY DECOMPOSITION ONLY. The primary grammar is cross-domain (below); a
+        per-domain grammar in the composite alongside it would double-count the sequence.
+      role: decomposition
+  host_domain:
+    clock: {primitives: [first_severe_toxicity_months], genie: not_observed, prime: partial_AE, atlas: generated}
+    occupancy: {primitives: [impaired_state_monthly], genie: not_observed, prime: not_observed, atlas: generated}
+    richness: {primitives: [n_toxicity_episodes_sqrt], genie: not_observed, prime: partial_AE, atlas: generated}
+    grammar: {role: decomposition}
+    standing: >
+      GENERATED-ONLY at present. Reported as native richness and audited for coherence,
+      never scored against a dataset that cannot observe it -- scoring against silence.
+  treatment_domain:
+    clock:
+      structurally_empty: [first_switch_months]
+      note: first switch is recoverable from the monthly on/off vector plus starts; one home.
+    occupancy:
+      primitives: [on_treatment_monthly]
+      genie: observed
+      prime: observed
+      atlas: generated
+    richness:
+      primitives: [n_starts_sqrt, n_stops_sqrt, n_distinct_classes_sqrt]
+      genie: observed
+      prime: observed
+      atlas: generated
+    identity:
+      primitives: [class_typed_start_marks]
+      note: >
+        Added 2026-08-20 after the completeness audit: FOLFOX-then-FOLFIRI and
+        FOLFOX-then-osimertinib were indistinguishable under bare on/off. The class comes
+        from the corpus's own action_class() mapping; identity flows to the GRAMMAR through
+        class-typed marks (same-family different-class substitution costs 0.5) and to the
+        treatment block as the distinct-class count. Sequence identity beyond that is
+        grammar's job, not a new block.
+      genie: observed via regimen_drugs -> action_class
+      prime: observed (randomised arms)
+      atlas: generated component_classes -- MAPPING TO THE GENIE CLASS VOCABULARY IS NOT
+        YET BUILT and must be before any generated-vs-real identity comparison
+    grammar: {role: decomposition}
+  terminal_domain:
+    clock:
+      primitives: [death_months]
+      genie: observed
+      prime: observed
+      atlas: generated
+    occupancy:
+      structurally_empty: [alive_monthly]
+      note: the alive step function IS the death clock; filling this cell re-creates the duplicate.
+    richness: {structurally_empty: [n_deaths], note: death is 0/1 and lives in the clock}
+    grammar: {structurally_empty: [terminal_order], note: death is last by construction}
+  cross_domain:
+    grammar:
+      primitives: [typed_vp_prototype_embedding]
+      role: PRIMARY
+      note: >
+        The clinically meaningful order is BETWEEN domains -- toxicity before
+        discontinuation, progression before switch, response before de-escalation. The full
+        event alphabet is used; per-domain grammars are secondary decompositions and never
+        enter the composite beside this one.
+      normalization: own-duration primary (shape-only); common-horizon declared sensitivity
+      metric_status: >
+        normalized dissimilarity, NOT a metric (triangle inequality fails under the
+        /max(n,m) scale; verified counterexample asserted in the test suite). Enters
+        arithmetic only through the prototype embedding.
+      genie: observed_over_observable_alphabet
+      prime: observed_over_observable_alphabet
+      atlas: generated_full_alphabet
+
+# =======================================================================================
+# OBSERVATION MASKS — the operator each dataset applies before any comparison
+# =======================================================================================
+
+masks:
+  genie:
+    keeps: [progression, recurrence, response, systemic_treatment_start,
+            systemic_treatment_switch, systemic_treatment_stop, death]
+    folds: {recurrence: progression}
+    drops: [toxicity, patient_state_update, clonal_evolution_event, local_intervention,
+            systemic_treatment_modification]
+    anatomy: >
+      AUDITED 2026-08-20 (genie_anatomy_audit_v1.py, rule pre-declared before the numbers):
+      BOTH GATES FAIL under the CURRENT SITE-MENTION OPERATOR, so no anatomical coordinate
+      enters the v1 metric. The 77% reappearance rate (25,254 disappearance events) shows
+      that operator cannot support occupancy -- but the operator treats every scan as able
+      to observe every site, while scan_sites distinguishes chest, brain, abdomen and
+      pelvis studies, so part of that 77% is a brain lesion "absent" from a chest CT. The
+      verdict is about the operator, not yet about anatomical occupancy intrinsically; a
+      v2 audit must restrict disappearance to capability-matched scans. Site EMERGENCE fails
+      narrowly and on one criterion only: first-scan share is 22% (comfortably under the
+      50% under-ascertainment bound) but mapping coverage is 84.4% against the required
+      90% (NSCLC 91.2%, BRCA 81.7%, CRC 78.0%). The unmapped mass is dominated by
+      PRIMARY-site codes the metastatic map deliberately omits (C50 breast, C18/C20
+      colorectal), ill-defined C76, soft-tissue C49, and a non-topography artefact (F30) --
+      and the map treats primaries inconsistently, since C34 serves NSCLC as both primary
+      and mapped site. A v2 audit with a pre-declared, cohort-consistent decision on
+      primary-site codes could plausibly pass emergence; until it runs, anatomy stays out.
+      Numbers: outputs/exploratory_state_space_gate/anatomy_audit.json.
+  prime:
+    keeps: [randomised_action, lesion_response, lesion_progression, death, baseline_ecog]
+    adverse_events: to be verified against the actual tables before any AE cell is scored
+  atlas:
+    keeps: everything generated (full alphabet)
+    standing: native richness only; no realism claim without projection through a real mask
+
+# =======================================================================================
+# FREEZE DECLARATION for the holistic GENIE ladder
+# =======================================================================================
+
+freeze:
+  scope: >
+    The GENIE-OBSERVABLE SUBMATRIX, exactly as implemented and fixture-tested in
+    scripts/explore/trajectory_representation_v1.py at commit 64896f2: clock (first
+    progression, death, first response), responding-state occupancy, richness
+    (progressions, responses), cross-domain grammar (prototype embedding), treatment
+    (monthly occupancy + starts/stops). Host, toxicity and anatomy cells are NOT part of
+    this freeze and are extended afterwards as generated-only descriptives.
+  fitting_discipline: >
+    Prototype selection and coordinate/block scaling are LEARNED FROM OUTCOME COURSES, so a
+    representation fitted on all patients before cross-validation leaks held-out courses
+    into the coordinate system. For the ladder's information-gain G, prototypes and scales
+    are fitted INDEPENDENTLY INSIDE EVERY TRAINING FOLD (patient-level folds keyed on
+    record_id, so repeated landmarks stay together). For the distributional displacement J,
+    pooled fitting is retained and remains EXACT: the permutation test shuffles labels the
+    representation never sees, so label exchangeability under the null is unaffected.
+    A publication representation is frozen on the complete discovery cohort only AFTER the
+    ladder, for application to generated data.
+  prespecified_readouts:
+    - component-wise G per rung (clock, occupancy, richness, grammar, treatment)
+    - component-wise J per rung
+    - support and effective sample size beside every estimate
+    - composite SECONDARY only
+    - the passage/occupancy gate (genie_state_space_gate_v3, durable outputs of 2026-08-20)
+      reported beside it as the conventional baseline
+    - horizons 24 and 12 months; grammar own-duration primary with common-horizon sensitivity
+  multiplicity: Holm across all rung-by-component comparisons within each horizon

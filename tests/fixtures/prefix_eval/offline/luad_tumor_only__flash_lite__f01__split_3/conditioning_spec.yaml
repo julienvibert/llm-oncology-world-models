@@ -1,0 +1,37 @@
+conditioning:
+  baseline_seed:
+    identity_card:
+      diagnosis:
+        oncotree_code: LUAD
+        diagnosis_date: '2024-01-15'
+  fixed_events:
+    origin: observed_prefix
+    cutoff_date: '2024-06-01'
+    events:
+    - date: '2024-03-15'
+      intent: disease_control
+      regimen:
+        components:
+        - osimeritinib
+        label: osimeritinib
+      type: systemic_treatment_start
+    - ae: diarrhea
+      ae_category: gastrointestinal
+      causes:
+      - osimeritinib
+      ctcae_v5_grade: 2
+      date: '2024-04-10'
+      toxicity_transition: onset
+      type: toxicity
+    - date: '2024-06-01'
+      disease:
+      - burden: moderate
+        clone: C0
+        kinetic: shrinking
+        site: lung
+      - burden: microscopic
+        clone: C0
+        kinetic: shrinking
+        site: brain
+      type: response
+  free_text_operator_constraints: ''

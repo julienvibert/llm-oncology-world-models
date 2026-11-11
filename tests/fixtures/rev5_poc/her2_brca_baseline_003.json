@@ -1,0 +1,105 @@
+{
+  "baseline_id": "her2_brca_003",
+  "identity_card": {
+    "demographics": {
+      "age_at_diagnosis": 38,
+      "sex": "female",
+      "ecog_ps_at_diagnosis": 1
+    },
+    "diagnosis": {
+      "diagnosis_date": "2024-03-10",
+      "oncotree_code": "BRCA",
+      "histology_class": "invasive_ductal",
+      "histology_bucket": "ductal_carcinoma",
+      "primary_site": "left_breast",
+      "primary_site_class": "breast",
+      "histology_description": "High-grade invasive ductal carcinoma"
+    },
+    "staging": {
+      "stage_class": "metastatic",
+      "formal_stage": {
+        "system": "ajcc_tnm_8",
+        "group_label": "IV",
+        "tnm": {"T": "T4", "N": "N2", "M": "M1"},
+        "components": {}
+      }
+    },
+    "molecular_profile": {
+      "primary_driver_bucket": "erbb2_her2",
+      "alterations": [
+        {
+          "gene": "ERBB2",
+          "alteration_type": "amplification",
+          "alteration": "ERBB2 amplification",
+          "variant": null,
+          "driver_bucket": "erbb2_her2",
+          "actionability": "standard_of_care",
+          "is_primary_driver": true
+        }
+      ],
+      "biomarkers": [
+        {"name": "ER", "value": "0%"},
+        {"name": "PR", "value": "0%"},
+        {"name": "HER2 IHC", "value": "3+"},
+        {"name": "HER2 FISH", "value": "amplified"},
+        {"name": "Ki-67", "value": "70%"}
+      ]
+    },
+    "baseline_health": {
+      "renal": "normal",
+      "hepatic": "normal",
+      "cardiac": "normal",
+      "marrow_reserve": "normal",
+      "pulmonary": "normal",
+      "contraindications": [],
+      "frailty_band": "fit",
+      "autoimmune_disease_history": false,
+      "neuropathy_at_baseline": "none"
+    }
+  },
+  "clone_registry": [
+    {
+      "clone_id": "C0",
+      "clone_role": "founder",
+      "drivers": ["ERBB2_amplification"],
+      "first_presence_date": "2024-03-10"
+    }
+  ],
+  "baseline_disease_burden": [
+    {
+      "clone": "C0",
+      "site": "left_breast",
+      "site_class": "primary_site",
+      "burden": "bulky",
+      "kinetic": "stable"
+    },
+    {
+      "clone": "C0",
+      "site": "lung",
+      "site_class": "lung",
+      "burden": "small",
+      "kinetic": "growing"
+    },
+    {
+      "clone": "C0",
+      "site": "brain",
+      "site_class": "brain",
+      "burden": "microscopic",
+      "kinetic": "appearing"
+    }
+  ],
+  "baseline_patient_state": {
+    "weight_kg": 58,
+    "symptom_burden": "moderate"
+  },
+  "medical_history": {
+    "comorbidities": [],
+    "smoking_status": "never",
+    "tobacco_exposure_band": "none",
+    "pack_years": 0.0,
+    "family_history": [
+      {"relation": "paternal_aunt_uncle", "cancer_type": "breast_cancer"}
+    ],
+    "contextual_factors": []
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "baseline_id": "egfr_luad_001",
+  "identity_card": {
+    "demographics": {
+      "age_at_diagnosis": 64,
+      "sex": "female",
+      "ecog_ps_at_diagnosis": 1
+    },
+    "diagnosis": {
+      "diagnosis_date": "2024-01-15",
+      "oncotree_code": "LUAD",
+      "diagnosis_label": "lung adenocarcinoma",
+      "histology_class": "lung_adenocarcinoma",
+      "histology_bucket": "adenocarcinoma",
+      "primary_site": "right_upper_lobe_lung",
+      "primary_site_class": "lung",
+      "histology_description": "TTF-1-positive lung adenocarcinoma"
+    },
+    "staging": {
+      "stage_class": "metastatic",
+      "formal_stage": {
+        "system": "ajcc_tnm_8",
+        "group_label": "IVB",
+        "tnm": {"T": "T2a", "N": "N2", "M": "M1c"},
+        "components": {
+          "metastatic_sites": ["bone", "right_adrenal"]
+        }
+      }
+    },
+    "molecular_profile": {
+      "primary_driver_bucket": "egfr",
+      "alterations": [
+        {
+          "gene": "EGFR",
+          "alteration_type": "mutation",
+          "alteration": "EGFR L858R",
+          "variant": "L858R",
+          "driver_bucket": "egfr",
+          "actionability": "standard_of_care",
+          "is_primary_driver": true
+        },
+        {
+          "gene": "TP53",
+          "alteration_type": "mutation",
+          "alteration": "TP53 R175H",
+          "variant": "R175H",
+          "driver_bucket": "tp53",
+          "actionability": "prognostic_only",
+          "is_primary_driver": false
+        },
+        {
+          "gene": "ALK",
+          "alteration_type": "wild_type",
+          "alteration": "ALK rearrangement not detected",
+          "variant": null,
+          "driver_bucket": "alk",
+          "actionability": "no_known_actionability",
+          "is_primary_driver": false
+        },
+        {
+          "gene": "ROS1",
+          "alteration_type": "wild_type",
+          "alteration": "ROS1 rearrangement not detected",
+          "variant": null,
+          "driver_bucket": "ros1",
+          "actionability": "no_known_actionability",
+          "is_primary_driver": false
+        }
+      ],
+      "biomarkers": [
+        {"name": "PD-L1 TPS", "value": "15%"},
+        {"name": "TTF-1", "value": "positive"},
+        {"name": "Napsin A", "value": "positive"},
+        {"name": "ALK IHC", "value": "negative"},
+        {"name": "ROS1 FISH", "value": "negative"}
+      ]
+    },
+    "baseline_health": {
+      "renal": "normal",
+      "hepatic": "normal",
+      "cardiac": "normal",
+      "marrow_reserve": "normal",
+      "pulmonary": "normal",
+      "contraindications": [],
+      "frailty_band": "fit",
+      "autoimmune_disease_history": false,
+      "neuropathy_at_baseline": "none"
+    }
+  },
+  "clone_registry": [
+    {
+      "clone_id": "C0",
+      "clone_role": "founder",
+      "drivers": ["EGFR_L858R", "TP53_R175H"],
+      "first_presence_date": "2024-01-15"
+    }
+  ],
+  "baseline_disease_burden": [
+    {
+      "clone": "C0",
+      "site": "right_upper_lobe_lung",
+      "site_class": "primary_site",
+      "burden": "moderate",
+      "kinetic": "stable"
+    },
+    {
+      "clone": "C0",
+      "site": "mediastinal_lymph_nodes",
+      "site_class": "lymph_node",
+      "burden": "moderate",
+      "kinetic": "growing"
+    },
+    {
+      "clone": "C0",
+      "site": "bone",
+      "site_class": "bone",
+      "burden": "small",
+      "kinetic": "growing"
+    },
+    {
+      "clone": "C0",
+      "site": "right_adrenal",
+      "site_class": "adrenal",
+      "burden": "small",
+      "kinetic": "growing"
+    }
+  ],
+  "baseline_patient_state": {
+    "weight_kg": 62,
+    "symptom_burden": "mild"
+  },
+  "medical_history": {
+    "comorbidities": [
+      {
+        "category": "cardiovascular",
+        "term": "hypertension",
+        "status": "controlled"
+      },
+      {
+        "category": "metabolic_endocrine",
+        "term": "hypothyroidism",
+        "status": "controlled"
+      }
+    ],
+    "smoking_status": "never",
+    "tobacco_exposure_band": "none",
+    "pack_years": 0.0,
+    "family_history": [],
+    "contextual_factors": []
+  }
+}

@@ -1,0 +1,123 @@
+[
+  {
+    "date": "2024-02-15",
+    "type": "systemic_treatment_start",
+    "regimen": {
+      "label": "THP",
+      "components": ["trastuzumab", "pertuzumab", "docetaxel"],
+      "component_classes": ["anti_her2", "anti_her2", "cytotoxic_chemotherapy"]
+    }
+  },
+  {
+    "date": "2024-05-01",
+    "type": "response",
+    "disease": [
+      {
+        "clone": "C0",
+        "site": "liver",
+        "site_class": "liver",
+        "burden": "small",
+        "kinetic": "shrinking"
+      }
+    ],
+    "patient": {
+      "ecog_ps": 0,
+      "symptom_burden": "none"
+    },
+    "recognized_date": "2024-05-08"
+  },
+  {
+    "date": "2025-01-10",
+    "type": "progression",
+    "disease": [
+      {
+        "clone": "C0",
+        "site": "liver",
+        "site_class": "liver",
+        "burden": "moderate",
+        "kinetic": "growing"
+      },
+      {
+        "clone": "C0",
+        "site": "bone",
+        "site_class": "bone",
+        "burden": "small",
+        "kinetic": "appearing"
+      }
+    ],
+    "patient": {
+      "ecog_ps": 1,
+      "weight_kg": 64
+    },
+    "recognized_date": "2025-01-17"
+  },
+  {
+    "date": "2025-01-20",
+    "type": "systemic_treatment_switch",
+    "regimen": {
+      "label": "T-DM1",
+      "components": ["trastuzumab_emtansine"],
+      "component_classes": ["antibody_drug_conjugate"]
+    }
+  },
+  {
+    "date": "2025-06-30",
+    "type": "progression",
+    "disease": [
+      {
+        "clone": "C0",
+        "site": "brain",
+        "site_class": "brain",
+        "burden": "small",
+        "kinetic": "appearing"
+      }
+    ],
+    "patient": {
+      "ecog_ps": 2,
+      "weight_kg": 58
+    },
+    "recognized_date": "2025-07-02"
+  },
+  {
+    "date": "2025-07-05",
+    "type": "systemic_treatment_switch",
+    "regimen": {
+      "label": "tucatinib_capecitabine_trastuzumab",
+      "components": ["tucatinib", "capecitabine", "trastuzumab"],
+      "component_classes": ["anti_her2", "cytotoxic_chemotherapy", "anti_her2"]
+    }
+  },
+  {
+    "date": "2025-12-15",
+    "type": "progression",
+    "disease": [
+      {
+        "clone": "C0",
+        "site": "liver",
+        "site_class": "liver",
+        "burden": "bulky",
+        "kinetic": "growing"
+      },
+      {
+        "clone": "C0",
+        "site": "brain",
+        "site_class": "brain",
+        "burden": "moderate",
+        "kinetic": "growing"
+      }
+    ],
+    "patient": {
+      "ecog_ps": 3,
+      "weight_kg": 55,
+      "symptom_burden": "severe"
+    },
+    "recognized_date": "2025-12-20"
+  },
+  {
+    "date": "2026-01-30",
+    "type": "death",
+    "cause_category": "cancer_progression",
+    "cause": "progressive metastatic breast cancer with hepatic and CNS disease",
+    "eol_care_pattern": "hospice"
+  }
+]

@@ -1,0 +1,685 @@
+{
+  "_reconstruction": {
+    "status": "RECONSTRUCTION, not the original file",
+    "date": "2026-10-14",
+    "replaces": "/private/tmp/sentinel_reasoning_battery_v5_remaining_source/arm_manifest.json (lost)",
+    "method": "Entry schema from scripts/explore/build_sentinel_battery.py build_cell()+main(). policy_id read from runs/sentinel_usecase_*/config.yaml cells; context and arm_key = policy_id split on '__' (builder: policy_id = f'{context}__{arm_key}'); role = sentinel_benchmark_spec_v1.yaml contexts[context].arms[arm_key]; regimen_label parsed from the cell operator_constraints text (supportive = 'best supportive care'); intervention_fixed_in_prefix = arm != supportive (builder logic; not recorded in run configs). _source_runs lists the run folders that contain the cell id.",
+    "scope": "Superset: every cell of all 11 sentinel_usecase_* run folders (original likely held a subset).",
+    "use": "Scoring uses only policy_id -> (context, arm_key). Keys starting with '_' are metadata and must be dropped before passing this file to plot_sentinel_trust_map.py / score_sentinel_benchmark.py (they iterate manifest.values()). See docs/run_provenance/sentinel_benchmark_scoring.md."
+  },
+  "braf_melanoma__braf_mek": {
+    "arm_key": "braf_mek",
+    "policy_id": "BRAF_melanoma__braf_mek",
+    "regimen_label": "dabrafenib + trametinib",
+    "intervention_fixed_in_prefix": true,
+    "context": "BRAF_melanoma",
+    "condition_id": "braf_melanoma",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_braf_melanoma_v5_2026_07_13"
+    ]
+  },
+  "braf_melanoma__io_combo": {
+    "arm_key": "io_combo",
+    "policy_id": "BRAF_melanoma__io_combo",
+    "regimen_label": "nivolumab + ipilimumab",
+    "intervention_fixed_in_prefix": true,
+    "context": "BRAF_melanoma",
+    "condition_id": "braf_melanoma",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_braf_melanoma_v5_2026_07_13"
+    ]
+  },
+  "braf_melanoma__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "BRAF_melanoma__chemo",
+    "regimen_label": "dacarbazine",
+    "intervention_fixed_in_prefix": true,
+    "context": "BRAF_melanoma",
+    "condition_id": "braf_melanoma",
+    "role": "weak_chemo",
+    "_source_runs": [
+      "sentinel_usecase_braf_melanoma_v5_2026_07_13"
+    ]
+  },
+  "braf_melanoma__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "BRAF_melanoma__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "BRAF_melanoma",
+    "condition_id": "braf_melanoma",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_braf_melanoma_v5_2026_07_13"
+    ]
+  },
+  "ccrcc__io_tki": {
+    "arm_key": "io_tki",
+    "policy_id": "ccRCC__io_tki",
+    "regimen_label": "pembrolizumab + axitinib",
+    "intervention_fixed_in_prefix": true,
+    "context": "ccRCC",
+    "condition_id": "ccrcc",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_ccrcc_v5_2026_07_13"
+    ]
+  },
+  "ccrcc__tki": {
+    "arm_key": "tki",
+    "policy_id": "ccRCC__tki",
+    "regimen_label": "sunitinib",
+    "intervention_fixed_in_prefix": true,
+    "context": "ccRCC",
+    "condition_id": "ccrcc",
+    "role": "weak",
+    "_source_runs": [
+      "sentinel_usecase_ccrcc_v5_2026_07_13"
+    ]
+  },
+  "ccrcc__cytotoxic_chemo": {
+    "arm_key": "cytotoxic_chemo",
+    "policy_id": "ccRCC__cytotoxic_chemo",
+    "regimen_label": "gemcitabine + doxorubicin",
+    "intervention_fixed_in_prefix": true,
+    "context": "ccRCC",
+    "condition_id": "ccrcc",
+    "role": "wrong_here",
+    "_source_runs": [
+      "sentinel_usecase_ccrcc_v5_2026_07_13"
+    ]
+  },
+  "ccrcc__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "ccRCC__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "ccRCC",
+    "condition_id": "ccrcc",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_ccrcc_v5_2026_07_13"
+    ]
+  },
+  "msi_h_crc__pembrolizumab": {
+    "arm_key": "pembrolizumab",
+    "policy_id": "MSI_H_CRC__pembrolizumab",
+    "regimen_label": "pembrolizumab",
+    "intervention_fixed_in_prefix": true,
+    "context": "MSI_H_CRC",
+    "condition_id": "msi_h_crc",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "msi_h_crc__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "MSI_H_CRC__chemo",
+    "regimen_label": "FOLFOX",
+    "intervention_fixed_in_prefix": true,
+    "context": "MSI_H_CRC",
+    "condition_id": "msi_h_crc",
+    "role": "weak_chemo",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "msi_h_crc__cetuximab": {
+    "arm_key": "cetuximab",
+    "policy_id": "MSI_H_CRC__cetuximab",
+    "regimen_label": "FOLFIRI + cetuximab",
+    "intervention_fixed_in_prefix": true,
+    "context": "MSI_H_CRC",
+    "condition_id": "msi_h_crc",
+    "role": "wrong_target",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "msi_h_crc__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "MSI_H_CRC__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "MSI_H_CRC",
+    "condition_id": "msi_h_crc",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "mss_ras_crc__chemo_bev": {
+    "arm_key": "chemo_bev",
+    "policy_id": "MSS_RAS_CRC__chemo_bev",
+    "regimen_label": "FOLFOX + bevacizumab",
+    "intervention_fixed_in_prefix": true,
+    "context": "MSS_RAS_CRC",
+    "condition_id": "mss_ras_crc",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "mss_ras_crc__pembrolizumab": {
+    "arm_key": "pembrolizumab",
+    "policy_id": "MSS_RAS_CRC__pembrolizumab",
+    "regimen_label": "pembrolizumab",
+    "intervention_fixed_in_prefix": true,
+    "context": "MSS_RAS_CRC",
+    "condition_id": "mss_ras_crc",
+    "role": "wrong_here",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "mss_ras_crc__cetuximab": {
+    "arm_key": "cetuximab",
+    "policy_id": "MSS_RAS_CRC__cetuximab",
+    "regimen_label": "FOLFIRI + cetuximab",
+    "intervention_fixed_in_prefix": true,
+    "context": "MSS_RAS_CRC",
+    "condition_id": "mss_ras_crc",
+    "role": "wrong_target",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "mss_ras_crc__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "MSS_RAS_CRC__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "MSS_RAS_CRC",
+    "condition_id": "mss_ras_crc",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_crc_flip_v5_2026_07_13"
+    ]
+  },
+  "egfr_mut_luad__osimertinib": {
+    "arm_key": "osimertinib",
+    "policy_id": "EGFR_1L__osimertinib",
+    "regimen_label": "osimertinib",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_1L",
+    "condition_id": "egfr_mut_luad",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_flip_v5_2026_07_13"
+    ]
+  },
+  "egfr_mut_luad__pembrolizumab": {
+    "arm_key": "pembrolizumab",
+    "policy_id": "EGFR_1L__pembrolizumab",
+    "regimen_label": "pembrolizumab",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_1L",
+    "condition_id": "egfr_mut_luad",
+    "role": "weak_io",
+    "_source_runs": [
+      "sentinel_usecase_egfr_flip_v5_2026_07_13"
+    ]
+  },
+  "egfr_mut_luad__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "EGFR_1L__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "EGFR_1L",
+    "condition_id": "egfr_mut_luad",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_flip_v5_2026_07_13"
+    ]
+  },
+  "egfr_wt_luad__osimertinib": {
+    "arm_key": "osimertinib",
+    "policy_id": "EGFR_WT_1L__osimertinib",
+    "regimen_label": "osimertinib",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_WT_1L",
+    "condition_id": "egfr_wt_luad",
+    "role": "wrong_target",
+    "_source_runs": [
+      "sentinel_usecase_egfr_flip_v5_2026_07_13"
+    ]
+  },
+  "egfr_wt_luad__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "EGFR_WT_1L__chemo",
+    "regimen_label": "carboplatin + pemetrexed",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_WT_1L",
+    "condition_id": "egfr_wt_luad",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_flip_v5_2026_07_13"
+    ]
+  },
+  "egfr_wt_luad__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "EGFR_WT_1L__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "EGFR_WT_1L",
+    "condition_id": "egfr_wt_luad",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_flip_v5_2026_07_13"
+    ]
+  },
+  "egfr_post_osi_explicit_resistance__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "EGFR_post_progression__chemo",
+    "regimen_label": "carboplatin + pemetrexed",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_post_progression",
+    "condition_id": "egfr_post_osi_explicit_resistance",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_post_osi_explicit_resistance_v5_2026_07_13",
+      "sentinel_usecase_egfr_post_osi_explicit_resistance_v5_v2_2026_07_13"
+    ]
+  },
+  "egfr_post_osi_explicit_resistance__continue_osi": {
+    "arm_key": "continue_osi",
+    "policy_id": "EGFR_post_progression__continue_osi",
+    "regimen_label": "osimertinib",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_post_progression",
+    "condition_id": "egfr_post_osi_explicit_resistance",
+    "role": "wrong_setting",
+    "_source_runs": [
+      "sentinel_usecase_egfr_post_osi_explicit_resistance_v5_2026_07_13",
+      "sentinel_usecase_egfr_post_osi_explicit_resistance_v5_v2_2026_07_13"
+    ]
+  },
+  "egfr_post_osi_explicit_resistance__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "EGFR_post_progression__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "EGFR_post_progression",
+    "condition_id": "egfr_post_osi_explicit_resistance",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_post_osi_explicit_resistance_v5_2026_07_13",
+      "sentinel_usecase_egfr_post_osi_explicit_resistance_v5_v2_2026_07_13"
+    ]
+  },
+  "egfr_post_osi_progression__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "EGFR_post_progression__chemo",
+    "regimen_label": "carboplatin + pemetrexed",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_post_progression",
+    "condition_id": "egfr_post_osi_progression",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_post_osi_v5_2026_07_13"
+    ]
+  },
+  "egfr_post_osi_progression__continue_osi": {
+    "arm_key": "continue_osi",
+    "policy_id": "EGFR_post_progression__continue_osi",
+    "regimen_label": "osimertinib",
+    "intervention_fixed_in_prefix": true,
+    "context": "EGFR_post_progression",
+    "condition_id": "egfr_post_osi_progression",
+    "role": "wrong_setting",
+    "_source_runs": [
+      "sentinel_usecase_egfr_post_osi_v5_2026_07_13"
+    ]
+  },
+  "egfr_post_osi_progression__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "EGFR_post_progression__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "EGFR_post_progression",
+    "condition_id": "egfr_post_osi_progression",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_egfr_post_osi_v5_2026_07_13"
+    ]
+  },
+  "her2_pos_breast__her2_chemo": {
+    "arm_key": "her2_chemo",
+    "policy_id": "HER2_pos_breast__her2_chemo",
+    "regimen_label": "trastuzumab + pertuzumab + docetaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "HER2_pos_breast",
+    "condition_id": "her2_pos_breast",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "her2_pos_breast__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "HER2_pos_breast__chemo",
+    "regimen_label": "paclitaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "HER2_pos_breast",
+    "condition_id": "her2_pos_breast",
+    "role": "weak_chemo",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "her2_pos_breast__endocrine": {
+    "arm_key": "endocrine",
+    "policy_id": "HER2_pos_breast__endocrine",
+    "regimen_label": "letrozole + palbociclib",
+    "intervention_fixed_in_prefix": true,
+    "context": "HER2_pos_breast",
+    "condition_id": "her2_pos_breast",
+    "role": "weak",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "her2_pos_breast__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "HER2_pos_breast__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "HER2_pos_breast",
+    "condition_id": "her2_pos_breast",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "her2_neg_breast__her2_chemo": {
+    "arm_key": "her2_chemo",
+    "policy_id": "HER2_neg_breast__her2_chemo",
+    "regimen_label": "trastuzumab + pertuzumab + docetaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "HER2_neg_breast",
+    "condition_id": "her2_neg_breast",
+    "role": "wrong_target",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "her2_neg_breast__endocrine": {
+    "arm_key": "endocrine",
+    "policy_id": "HER2_neg_breast__endocrine",
+    "regimen_label": "letrozole + palbociclib",
+    "intervention_fixed_in_prefix": true,
+    "context": "HER2_neg_breast",
+    "condition_id": "her2_neg_breast",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "her2_neg_breast__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "HER2_neg_breast__chemo",
+    "regimen_label": "paclitaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "HER2_neg_breast",
+    "condition_id": "her2_neg_breast",
+    "role": "weak_chemo",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "her2_neg_breast__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "HER2_neg_breast__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "HER2_neg_breast",
+    "condition_id": "her2_neg_breast",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_her2_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_sensitive__platinum": {
+    "arm_key": "platinum",
+    "policy_id": "HGSOC_relapse__platinum",
+    "regimen_label": "carboplatin + paclitaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_sensitive",
+    "role": "variable",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_sensitive__non_platinum": {
+    "arm_key": "non_platinum",
+    "policy_id": "HGSOC_relapse__non_platinum",
+    "regimen_label": "pegylated liposomal doxorubicin",
+    "intervention_fixed_in_prefix": true,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_sensitive",
+    "role": "alt",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_sensitive__parp": {
+    "arm_key": "parp",
+    "policy_id": "HGSOC_relapse__parp",
+    "regimen_label": "olaparib",
+    "intervention_fixed_in_prefix": true,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_sensitive",
+    "role": "conditional_brca_hrd",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_sensitive__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "HGSOC_relapse__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_sensitive",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_resistant__platinum": {
+    "arm_key": "platinum",
+    "policy_id": "HGSOC_relapse__platinum",
+    "regimen_label": "carboplatin + paclitaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_resistant",
+    "role": "variable",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_resistant__non_platinum": {
+    "arm_key": "non_platinum",
+    "policy_id": "HGSOC_relapse__non_platinum",
+    "regimen_label": "pegylated liposomal doxorubicin",
+    "intervention_fixed_in_prefix": true,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_resistant",
+    "role": "alt",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_resistant__parp": {
+    "arm_key": "parp",
+    "policy_id": "HGSOC_relapse__parp",
+    "regimen_label": "olaparib",
+    "intervention_fixed_in_prefix": true,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_resistant",
+    "role": "conditional_brca_hrd",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "hgsoc_platinum_resistant__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "HGSOC_relapse__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "HGSOC_relapse",
+    "condition_id": "hgsoc_platinum_resistant",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_hgsoc_v5_2026_07_13"
+    ]
+  },
+  "pancreas_fit__folfirinox": {
+    "arm_key": "folfirinox",
+    "policy_id": "pancreas_fit_frail__folfirinox",
+    "regimen_label": "FOLFIRINOX",
+    "intervention_fixed_in_prefix": true,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_fit",
+    "role": "intensive",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pancreas_fit__gem_nab": {
+    "arm_key": "gem_nab",
+    "policy_id": "pancreas_fit_frail__gem_nab",
+    "regimen_label": "gemcitabine + nab-paclitaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_fit",
+    "role": "moderate",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pancreas_fit__gem": {
+    "arm_key": "gem",
+    "policy_id": "pancreas_fit_frail__gem",
+    "regimen_label": "gemcitabine",
+    "intervention_fixed_in_prefix": true,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_fit",
+    "role": "gentle",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pancreas_fit__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "pancreas_fit_frail__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_fit",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pancreas_frail__folfirinox": {
+    "arm_key": "folfirinox",
+    "policy_id": "pancreas_fit_frail__folfirinox",
+    "regimen_label": "FOLFIRINOX",
+    "intervention_fixed_in_prefix": true,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_frail",
+    "role": "intensive",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pancreas_frail__gem_nab": {
+    "arm_key": "gem_nab",
+    "policy_id": "pancreas_fit_frail__gem_nab",
+    "regimen_label": "gemcitabine + nab-paclitaxel",
+    "intervention_fixed_in_prefix": true,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_frail",
+    "role": "moderate",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pancreas_frail__gem": {
+    "arm_key": "gem",
+    "policy_id": "pancreas_fit_frail__gem",
+    "regimen_label": "gemcitabine",
+    "intervention_fixed_in_prefix": true,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_frail",
+    "role": "gentle",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pancreas_frail__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "pancreas_fit_frail__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "pancreas_fit_frail",
+    "condition_id": "pancreas_frail",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_pancreas_v5_2026_07_13"
+    ]
+  },
+  "pdl1_high_luad__pembrolizumab": {
+    "arm_key": "pembrolizumab",
+    "policy_id": "PDL1_high_1L__pembrolizumab",
+    "regimen_label": "pembrolizumab",
+    "intervention_fixed_in_prefix": true,
+    "context": "PDL1_high_1L",
+    "condition_id": "pdl1_high_luad",
+    "role": "soc",
+    "_source_runs": [
+      "sentinel_usecase_pdl1_v5_2026_07_13"
+    ]
+  },
+  "pdl1_high_luad__chemo_io": {
+    "arm_key": "chemo_io",
+    "policy_id": "PDL1_high_1L__chemo_io",
+    "regimen_label": "carboplatin + pemetrexed + pembrolizumab",
+    "intervention_fixed_in_prefix": true,
+    "context": "PDL1_high_1L",
+    "condition_id": "pdl1_high_luad",
+    "role": "strong_alt",
+    "_source_runs": [
+      "sentinel_usecase_pdl1_v5_2026_07_13"
+    ]
+  },
+  "pdl1_high_luad__chemo": {
+    "arm_key": "chemo",
+    "policy_id": "PDL1_high_1L__chemo",
+    "regimen_label": "carboplatin + pemetrexed",
+    "intervention_fixed_in_prefix": true,
+    "context": "PDL1_high_1L",
+    "condition_id": "pdl1_high_luad",
+    "role": "weak_chemo",
+    "_source_runs": [
+      "sentinel_usecase_pdl1_v5_2026_07_13"
+    ]
+  },
+  "pdl1_high_luad__supportive": {
+    "arm_key": "supportive",
+    "policy_id": "PDL1_high_1L__supportive",
+    "regimen_label": "best supportive care",
+    "intervention_fixed_in_prefix": false,
+    "context": "PDL1_high_1L",
+    "condition_id": "pdl1_high_luad",
+    "role": "bsc",
+    "_source_runs": [
+      "sentinel_usecase_pdl1_v5_2026_07_13"
+    ]
+  }
+}

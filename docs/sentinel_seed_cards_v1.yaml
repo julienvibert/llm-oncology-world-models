@@ -1,0 +1,211 @@
+# Sentinel Reasoning Benchmark — constructed seed identity cards v1
+# FOR CLINICAL REVIEW (Julien) before generation. Zero cost.
+#
+# Each card follows the harness identity_card schema (demographics / diagnosis /
+# staging / molecular_profile / baseline_health). All metastatic (stage IV), 1L
+# unless a prior_history block says otherwise.
+#
+# DESIGN RULES:
+#  - FLIP PAIRS (egfr, msi_ras, her2) are IDENTICAL except the one flagged
+#    biomarker -> the Δ-score isolates biomarker use.
+#  - DYNAMIC PAIRS (hgsoc, pancreas) are IDENTICAL except the one flagged
+#    feature (prior-platinum interval / host state).
+#  - NSCLC cards can ALSO be cross-checked vs real GENIE outcomes.
+#  - The two history-dependent cards carry a prior_history block that must be
+#    wired as an OBSERVED PREFIX (prior events the model conditions on), not a
+#    baseline mutation.
+#
+# NEEDS YOUR SIGN-OFF: exact ages, mutation choices, PD-L1/MSI calls, and the
+# prior-history timings (platinum-free interval; time-to-progression on osi).
+
+seeds:
+
+  # ---------- EGFR flip pair (contexts EGFR_1L / EGFR_WT_1L) ----------
+  egfr_mut_luad:
+    context: EGFR_1L
+    demographics: {age_at_diagnosis: 62, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: LUAD, histology_class: adenocarcinoma, primary_site: lung}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations:
+        - {gene: EGFR, alteration: EGFR exon 19 deletion, driver_bucket: egfr, is_primary_driver: true, actionability: standard_of_care}
+        - {gene: TP53, alteration: TP53 mutation, driver_bucket: tp53, is_primary_driver: false, actionability: prognostic_only}
+      biomarkers: [{name: PD-L1, value: low}]
+      primary_driver_bucket: egfr
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  egfr_wt_luad:                       # flip: IDENTICAL to egfr_mut_luad except EGFR removed
+    context: EGFR_WT_1L
+    demographics: {age_at_diagnosis: 62, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: LUAD, histology_class: adenocarcinoma, primary_site: lung}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations:                    # pure EGFR flip: no actionable EGFR/ALK driver (NOT a KRAS-targeted case)
+        - {gene: TP53, alteration: TP53 mutation, driver_bucket: tp53, is_primary_driver: false, actionability: prognostic_only}
+      biomarkers: [{name: PD-L1, value: low}]
+      primary_driver_bucket: none     # EGFR-negative, no actionable driver -> osimertinib must NOT beat chemo
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  # ---------- ALK (context ALK_1L) ----------
+  alk_luad:
+    context: ALK_1L
+    demographics: {age_at_diagnosis: 54, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: LUAD, histology_class: adenocarcinoma, primary_site: lung}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: ALK, alteration: EML4-ALK fusion, driver_bucket: alk, is_primary_driver: true, actionability: standard_of_care}]
+      biomarkers: [{name: PD-L1, value: low}]
+      primary_driver_bucket: alk
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  # ---------- Driver-neg PD-L1-high (context nodriver_1L) ----------
+  pdl1_high_luad:
+    context: PDL1_high_1L
+    demographics: {age_at_diagnosis: 66, sex: male, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: LUAD, histology_class: adenocarcinoma, primary_site: lung}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: KRAS, alteration: KRAS G12V, driver_bucket: kras, is_primary_driver: false, actionability: prognostic_only}]
+      biomarkers: [{name: PD-L1, value: high (TPS >=50%)}]   # no actionable EGFR/ALK driver; PD-L1-high -> IO is right
+      primary_driver_bucket: none
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  # ---------- MSI/RAS flip pair (contexts MSI_H_CRC / MSS_RAS_CRC) ----------
+  msi_h_crc:
+    context: MSI_H_CRC
+    demographics: {age_at_diagnosis: 58, sex: male, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: COAD, histology_class: adenocarcinoma, primary_site: colon}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: BRAF, alteration: none, driver_bucket: none, is_primary_driver: false}]
+      biomarkers: [{name: MMR/MSI, value: MSI-high / dMMR}, {name: RAS, value: wild-type}]  # IO works
+      primary_driver_bucket: none
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  mss_ras_crc:                        # flip: IDENTICAL except MSS + RAS-mutant
+    context: MSS_RAS_CRC
+    demographics: {age_at_diagnosis: 58, sex: male, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: COAD, histology_class: adenocarcinoma, primary_site: colon}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: KRAS, alteration: KRAS G12D, driver_bucket: kras, is_primary_driver: true, actionability: prognostic_only}]
+      biomarkers: [{name: MMR/MSI, value: MSS / pMMR}, {name: RAS, value: mutant}]  # IO fails, anti-EGFR blocked
+      primary_driver_bucket: kras
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  # ---------- BRAF melanoma (context BRAF_melanoma) ----------
+  braf_melanoma:
+    context: BRAF_melanoma
+    demographics: {age_at_diagnosis: 51, sex: male, ecog_ps_at_diagnosis: 0}
+    diagnosis: {oncotree_code: SKCM, histology_class: melanoma, primary_site: skin}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: BRAF, alteration: BRAF V600E, driver_bucket: braf, is_primary_driver: true, actionability: standard_of_care}]
+      biomarkers: [{name: PD-L1, value: positive}]   # both BRAF/MEK and IO valid
+      primary_driver_bucket: braf
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  # ---------- HER2 flip pair (contexts HER2_pos_breast / HER2_neg_breast) ----------
+  her2_pos_breast:
+    context: HER2_pos_breast
+    demographics: {age_at_diagnosis: 55, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: IDC, histology_class: invasive_ductal_carcinoma, primary_site: breast}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: ERBB2, alteration: ERBB2 (HER2) amplification, driver_bucket: her2, is_primary_driver: true, actionability: standard_of_care}]
+      biomarkers: [{name: HER2, value: positive (IHC 3+)}, {name: HR, value: ER+/PR+}]
+      primary_driver_bucket: her2
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  her2_neg_breast:                    # flip: IDENTICAL except HER2 negative
+    context: HER2_neg_breast
+    demographics: {age_at_diagnosis: 55, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: IDC, histology_class: invasive_ductal_carcinoma, primary_site: breast}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: []
+      # HR+/HER2-neg: proper 1L comparator is endocrine +/- CDK4/6, NOT chemo alone.
+      # Flip signal = trastuzumab (wrong target) must NOT beat endocrine.
+      biomarkers: [{name: HER2, value: negative (IHC 0-1+)}, {name: HR, value: ER+/PR+}]
+      primary_driver_bucket: none
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  # ---------- Clear-cell RCC (context ccRCC) ----------
+  ccrcc:
+    context: ccRCC
+    demographics: {age_at_diagnosis: 60, sex: male, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: CCRCC, histology_class: clear_cell_renal_cell_carcinoma, primary_site: kidney}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: VHL, alteration: VHL loss, driver_bucket: vhl, is_primary_driver: false, actionability: prognostic_only}]
+      biomarkers: [{name: IMDC_risk, value: intermediate}]   # chemo is NOT a standard option in RCC
+      primary_driver_bucket: none
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+
+  # ---------- HGSOC dynamic pair (context HGSOC_relapse) — history via observed prefix ----------
+  hgsoc_platinum_sensitive:
+    context: HGSOC_relapse
+    demographics: {age_at_diagnosis: 63, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: HGSOC, histology_class: high_grade_serous_carcinoma, primary_site: ovary}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: TP53, alteration: TP53 mutation, driver_bucket: tp53, is_primary_driver: false}]
+      biomarkers: [{name: BRCA/HRD, value: wild-type / HRD-negative}]   # -> PARP NOT indicated (conditional check)
+      primary_driver_bucket: none
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+    prior_history:                    # WIRE AS OBSERVED PREFIX
+      note: "1L carboplatin-paclitaxel -> complete response -> relapse"
+      platinum_free_interval_months: 14   # >6mo => platinum-SENSITIVE
+
+  hgsoc_platinum_resistant:           # dynamic flip: IDENTICAL except platinum-free interval
+    context: HGSOC_relapse
+    demographics: {age_at_diagnosis: 63, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: HGSOC, histology_class: high_grade_serous_carcinoma, primary_site: ovary}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: TP53, alteration: TP53 mutation, driver_bucket: tp53, is_primary_driver: false}]
+      biomarkers: [{name: BRCA/HRD, value: wild-type / HRD-negative}]
+      primary_driver_bucket: none
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+    prior_history:
+      note: "1L carboplatin-paclitaxel -> response -> early relapse"
+      platinum_free_interval_months: 2    # <6mo => platinum-RESISTANT
+
+  # ---------- Pancreas dynamic pair (context pancreas_fit_frail) — host state ----------
+  pancreas_fit:
+    context: pancreas_fit_frail
+    demographics: {age_at_diagnosis: 60, sex: male, ecog_ps_at_diagnosis: 0}
+    diagnosis: {oncotree_code: PAAD, histology_class: pancreatic_ductal_adenocarcinoma, primary_site: pancreas}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: KRAS, alteration: KRAS G12D, driver_bucket: kras, is_primary_driver: true, actionability: none}]
+      biomarkers: []
+      primary_driver_bucket: kras
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}  # FIT -> FOLFIRINOX acceptable
+
+  pancreas_frail:                     # dynamic flip: IDENTICAL except host state
+    context: pancreas_fit_frail
+    demographics: {age_at_diagnosis: 60, sex: male, ecog_ps_at_diagnosis: 3}   # FRAIL
+    diagnosis: {oncotree_code: PAAD, histology_class: pancreatic_ductal_adenocarcinoma, primary_site: pancreas}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: KRAS, alteration: KRAS G12D, driver_bucket: kras, is_primary_driver: true, actionability: none}]
+      biomarkers: []
+      primary_driver_bucket: kras
+    baseline_health: {renal: mild_impairment, hepatic: mild_impairment, cardiac: normal, marrow_reserve: mild_impairment, pulmonary: normal, frailty_band: frail}  # FRAIL -> NOT FOLFIRINOX; BSC legitimate
+
+  # ---------- EGFR post-progression (context EGFR_post_progression) — history via observed prefix ----------
+  egfr_post_osi_progression:
+    context: EGFR_post_progression
+    demographics: {age_at_diagnosis: 62, sex: female, ecog_ps_at_diagnosis: 1}
+    diagnosis: {oncotree_code: LUAD, histology_class: adenocarcinoma, primary_site: lung}
+    staging: {stage_class: metastatic, formal_stage: {system: ajcc_tnm_8, group_label: IV}}
+    molecular_profile:
+      alterations: [{gene: EGFR, alteration: EGFR exon 19 deletion, driver_bucket: egfr, is_primary_driver: true, actionability: standard_of_care}]
+      biomarkers: [{name: PD-L1, value: low}]
+      primary_driver_bucket: egfr
+    baseline_health: {renal: normal, hepatic: normal, cardiac: normal, marrow_reserve: normal, pulmonary: normal, frailty_band: fit}
+    prior_history:                    # WIRE AS OBSERVED PREFIX -> patient is at PROGRESSION on osi
+      note: "1L osimertinib -> partial response -> progression"
+      time_to_progression_on_osi_months: 15
+      decision_point: "post-progression on osimertinib (2L decision)"

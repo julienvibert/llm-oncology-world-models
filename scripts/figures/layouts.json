@@ -1,0 +1,663 @@
+{
+  "_note": "Panel positions in mm from the top-left corner; width 180 mm (Nature Medicine double column). Letters are added at assembly. Edit this file to reorganise figures; panels are never redrawn for layout.",
+  "Figure 1": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f1b_prism",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "f2a_modal_share",
+        "x": 100,
+        "y": 0,
+        "label": "b"
+      },
+      {
+        "id": "f1a_patient_timeline",
+        "x": 0,
+        "y": 52,
+        "label": "c"
+      },
+      {
+        "id": "f2c_survival_by_family",
+        "x": 0,
+        "y": 114,
+        "label": "d"
+      }
+    ]
+  },
+  "Figure 2": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f1b_patient_state_map",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "f1d_whole_course",
+        "x": 102,
+        "y": 0,
+        "label": "b"
+      },
+      {
+        "id": "fig2_families_km",
+        "x": 0,
+        "y": 59,
+        "label": "c"
+      }
+    ]
+  },
+  "Figure 3": {
+    "width_mm": 180,
+    "no_band": true,
+    "panels": [
+      {
+        "id": "cand_fig3_four",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "f3d_wrong_target",
+        "x": 0,
+        "y": 143,
+        "label": "e"
+      },
+      {
+        "id": "n3_egfr_effect_modification",
+        "x": 121,
+        "y": 143,
+        "label": "f"
+      }
+    ]
+  },
+  "Figure 4": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f4a_design",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed07a_km_at_risk",
+        "x": 0,
+        "y": 38,
+        "label": "b"
+      },
+      {
+        "id": "f4c_survival_12m",
+        "x": 62,
+        "y": 120,
+        "label": "d"
+      },
+      {
+        "id": "f4b_early_deaths",
+        "x": 0,
+        "y": 120,
+        "label": "c"
+      }
+    ]
+  },
+  "Figure 5": {
+    "width_mm": 180,
+    "no_band": true,
+    "panels": [
+      {
+        "id": "n2_state_occupancy_main",
+        "x": 0,
+        "y": 3.5,
+        "label": "a"
+      },
+      {
+        "id": "prop_fig5_genie",
+        "x": 0,
+        "y": 48.5
+      },
+      {
+        "id": "f4h_joint_score",
+        "x": 0,
+        "y": 148.5,
+        "label": "d"
+      }
+    ]
+  },
+  "Figure 6": {
+    "width_mm": 180,
+    "no_band": true,
+    "panels": [
+      {
+        "id": "n8_prime_time_in_state",
+        "x": 0,
+        "y": 3.5,
+        "label": "a"
+      },
+      {
+        "id": "prop_fig6_prime",
+        "x": 0,
+        "y": 48.5
+      },
+      {
+        "id": "n6_support_ladder",
+        "x": 0,
+        "y": 147.5,
+        "label": "d"
+      }
+    ]
+  },
+  "Extended Data Figure 1": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "edc_atlas_phenotype",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed02d_specificity",
+        "x": 0,
+        "y": 136,
+        "label": "b"
+      },
+      {
+        "id": "ed02e_blocks",
+        "x": 78,
+        "y": 136,
+        "label": "c"
+      }
+    ]
+  },
+  "Extended Data Figure 2": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f1a_history",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed03c_prior_progression",
+        "x": 0,
+        "y": 36,
+        "label": "b"
+      },
+      {
+        "id": "f1b_world_model",
+        "x": 0,
+        "y": 98,
+        "label": "c"
+      }
+    ]
+  },
+  "Extended Data Figure 3": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "cand_final_atlas",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Extended Data Figure 4": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "ed04a_scenario_matrix",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed04b_scenario_counts",
+        "x": 100,
+        "y": 0,
+        "label": "b"
+      },
+      {
+        "id": "si04a_input_matrix",
+        "x": 0,
+        "y": 78,
+        "label": "c"
+      },
+      {
+        "id": "f3c_forest",
+        "x": 0,
+        "y": 123,
+        "label": "d"
+      },
+      {
+        "id": "f3d_occupancy_map",
+        "x": 66,
+        "y": 123,
+        "label": "e"
+      }
+    ]
+  },
+  "Extended Data Figure 5": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "ed07b_gap_by_horizon",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "f4g_calibration",
+        "x": 0,
+        "y": 52,
+        "label": "b"
+      },
+      {
+        "id": "f4e_fan_coverage",
+        "x": 72,
+        "y": 52,
+        "label": "c"
+      },
+      {
+        "id": "ed07e_donor_agreement",
+        "x": 122,
+        "y": 52,
+        "label": "d"
+      },
+      {
+        "id": "f4f_c_index",
+        "x": 0,
+        "y": 100,
+        "label": "e"
+      },
+      {
+        "id": "f4d_bias_deaths",
+        "x": 110,
+        "y": 100,
+        "label": "f"
+      }
+    ]
+  },
+  "Extended Data Figure 6": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "cand_final_genie_crc",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Extended Data Figure 7": {
+    "title": "Whole-course diagnostics: disagreement, documented treatment, disease state month by month, sensitivity analyses and timing.",
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f5c_course_disagreement",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "f5d_course_contrasts",
+        "x": 90,
+        "y": 0,
+        "label": "b"
+      },
+      {
+        "id": "f4i_treatment",
+        "x": 0,
+        "y": 35,
+        "label": "c"
+      },
+      {
+        "id": "ed08c_sensitivity",
+        "x": 0,
+        "y": 69,
+        "label": "d"
+      },
+      {
+        "id": "ed08d_regimen_timing",
+        "x": 100,
+        "y": 69,
+        "label": "e"
+      },
+      {
+        "id": "n2_state_occupancy_all_arms",
+        "x": 0,
+        "y": 131,
+        "label": "f"
+      }
+    ]
+  },
+  "Extended Data Figure 8": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f6a_prime_rmst",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed09a_forest_hr",
+        "x": 0,
+        "y": 43,
+        "label": "b"
+      },
+      {
+        "id": "n12a_prime_km",
+        "x": 0,
+        "y": 84,
+        "label": "c"
+      }
+    ]
+  },
+  "Extended Data Figure 9": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "cand_final_prime_mut",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 1": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f2d_trajectory_gallery",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 2": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "si01b_event_ribbon",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "si01c_fingerprint",
+        "x": 0,
+        "y": 73,
+        "label": "b"
+      },
+      {
+        "id": "si01a_complete_path",
+        "x": 0,
+        "y": 133,
+        "label": "c"
+      }
+    ]
+  },
+  "Supplementary Figure 3": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "si03a_treatment_journey",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "si03b_toxicity_per_course",
+        "x": 0,
+        "y": 72,
+        "label": "b"
+      },
+      {
+        "id": "si03c_toxicity_grades",
+        "x": 84,
+        "y": 72,
+        "label": "c"
+      },
+      {
+        "id": "si03d_toxicity_organ_systems",
+        "x": 0,
+        "y": 119,
+        "label": "d"
+      }
+    ]
+  },
+  "Supplementary Figure 4": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "ed01c_embeddings",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed01a_state_map",
+        "x": 0,
+        "y": 52,
+        "label": "b"
+      },
+      {
+        "id": "ed01b_loadings",
+        "x": 88,
+        "y": 52,
+        "label": "c"
+      },
+      {
+        "id": "ed01d_events",
+        "x": 0,
+        "y": 126,
+        "label": "d"
+      }
+    ]
+  },
+  "Supplementary Figure 5": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "ed02a_model_maps",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed02b_cancer_map",
+        "x": 0,
+        "y": 64,
+        "label": "b"
+      },
+      {
+        "id": "ed02c_agreement",
+        "x": 92,
+        "y": 64,
+        "label": "c"
+      }
+    ]
+  },
+  "Supplementary Figure 6": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "n11_landscapes",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 7": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "ed06a_pan_atlas_field",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed06c_worst_cell",
+        "x": 98,
+        "y": 0,
+        "label": "b"
+      },
+      {
+        "id": "ed06d_short_arrows",
+        "x": 98,
+        "y": 44,
+        "label": "c"
+      },
+      {
+        "id": "ed06b_family_fields",
+        "x": 0,
+        "y": 88,
+        "label": "d"
+      }
+    ]
+  },
+  "Supplementary Figure 8": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "si05a_arrow_path",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "si05b_arrow_anatomy",
+        "x": 72,
+        "y": 0,
+        "label": "b"
+      },
+      {
+        "id": "f1c_dynamics",
+        "x": 0,
+        "y": 84,
+        "label": "c"
+      }
+    ]
+  },
+  "Supplementary Figure 9": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "cand_cc_css_scenarios",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 10": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "cand_final_genie_nsclc",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 11": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f5a_case_fans",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed08a_block_contrasts",
+        "x": 0,
+        "y": 65,
+        "label": "b"
+      },
+      {
+        "id": "ed08b_cancer_contrasts",
+        "x": 0,
+        "y": 116,
+        "label": "c"
+      }
+    ]
+  },
+  "Supplementary Figure 12": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "si08a_lung_fans",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 13": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "si09a_colorectal_fans",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 14": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "cand_final_prime_wt",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  },
+  "Supplementary Figure 15": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "f6d_precision_ladder",
+        "x": 0,
+        "y": 0,
+        "label": "a"
+      },
+      {
+        "id": "ed10a_error_vs_random",
+        "x": 0,
+        "y": 35,
+        "label": "b"
+      },
+      {
+        "id": "ed10b_index_patients",
+        "x": 92,
+        "y": 35,
+        "label": "c"
+      }
+    ]
+  },
+  "Supplementary Figure 16": {
+    "width_mm": 180,
+    "panels": [
+      {
+        "id": "n14_support_gradient",
+        "x": 0,
+        "y": 0,
+        "label": ""
+      }
+    ]
+  }
+}
