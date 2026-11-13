@@ -1,9 +1,9 @@
 # Large language models as oncology world models: code
 
-Code for "Large language models as oncology world models" (Vibert and Kather, 2026). Release v1.0.
+Code for "Large language models as oncology world models" (Vibert and Kather, 2026). Release v1.0.1: the code of v1.0, under the license below.
 Repository: https://github.com/julienvibert/llm-oncology-world-models
 Code and data: Zenodo, https://doi.org/10.5281/zenodo.24137513
-License: MIT (`LICENSE`). The generated data are under CC BY 4.0.
+License: Non-Commercial Software License – Heidelberg University Version 1.0 (NC-SA-UHDV1.0; `LICENSE`), non-commercial use only. The generated data are under CC BY 4.0.
 
 The pipeline asks a large language model (LLM) to write the complete course of a cancer patient, from diagnosis
 to death, as a structured record: a baseline description and a dated list of events (disease, treatment,

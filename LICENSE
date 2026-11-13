@@ -1,26 +1,40 @@
-MIT License
+Non-Commercial Software License – Heidelberg University Version 1.0 (NC-SA-UHDV1.0)
+SPDX-License-Identifier: LicenseRef-NC-SA-UHDV1.0
 
-Copyright (c) 2026 The SynthOncCases authors
+Copyright © 2026 Heidelberg University
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted to use, reproduce, modify, and distribute this software and its documentation solely for non-commercial purposes, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Attribution
+Redistribution or reuse must give appropriate credit to "Heidelberg University" and the original authors, include a reference to this license, and, where applicable, provide a link to the project's GitHub repository or official documentation.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. Non-Commercial Use
+This software and any derivative works may only be used, in whole or in part, for non-commercial use only.
+Non-commercial use means any use that is not primarily intended for or directed toward commercial advantage or monetary compensation and is not undertaken with the aim of developing products or services for sale or license.
+In particular, the following shall not be considered non-commercial use and therefore are not permitted under this License without a separate written agreement with Heidelberg University: (a) use of the Software by or within a for-profit company for its internal research and development activities, (b) use of the Software in contract research, commissioned research, or services carried out for or on behalf of any commercial entity, and (c) use of the Software within industry-funded research projects where the primary aim is to generate results, works, services, or data for commercial exploitation or proprietary advantage.
+Commercial use requires a separate written license from Heidelberg University.
+The software may not be used, in whole or in part, to provide services, consulting, or software-as-a-service offerings to any third party in return for payment, commercial advantage, or other monetary compensation, whether direct or indirect. Any use of the software for the purpose of evaluating, benchmarking, or developing products or services intended for commercial sale, license, or deployment in a commercial environment shall be deemed commercial use and is not permitted under this license without a separate written agreement with Heidelberg University.
 
-Data released with this project (the synthetic deposit on Zenodo) are licensed
-separately under Creative Commons Attribution 4.0 International (CC BY 4.0).
-GENIE-BPC and PRIME data are not covered by either licence and remain under
-their own access terms.
+3. ShareAlike (Copyleft)
+Any modifications or derivative works must also be licensed under this exact "Non-Commercial Open Software License – Heidelberg University Version 1.0 (NC-SA-UHDV1.0)."
+Derivative work authors must include clear attribution and retain all non-commercial and ShareAlike restrictions.
+
+4. No Warranty
+This software is provided "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement.
+In no event shall the authors or Heidelberg University be liable for any claim, damages, or other liability arising from, out of, or in connection with the software or its use.
+Licensee agrees to indemnify and hold harmless Heidelberg University and the authors from any claims, losses, or damages arising from Licensee's use of the Software.
+
+5. No Endorsement
+The names of Heidelberg University, its contributors or affiliated entities may not be used to endorse or promote derivative products without prior written permission.
+
+6. Commercial Rights Clause
+All intellectual property rights, including patent and trademark rights, are reserved by Heidelberg University and its partners.
+By downloading, installing, or using this software, you acknowledge that you have read, understood, and agree to the terms of this license.
+
+For commercial licensing inquiries, please contact:
+ScienceValue Heidelberg GmbH
+https://www.sciencevalue-heidelberg.de/
+ScienceValue.Heidelberg@med.uni-heidelberg.de
+
+Short name: NC-SA-UHDV1.0
+SPDX identifier: LicenseRef-NC-SA-UHDV1.0

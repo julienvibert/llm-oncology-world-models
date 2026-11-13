@@ -3,7 +3,7 @@ name = "synthonccases"
 version = "0.1.0"
 description = "Mapping and calibrating native oncology priors in leading LLMs"
 requires-python = ">=3.11,<3.13"
-license = {text = "MIT"}
+license = {text = "LicenseRef-NC-SA-UHDV1.0"}
 dependencies = [
     "anthropic>=0.40",
     "openai>=1.50",
