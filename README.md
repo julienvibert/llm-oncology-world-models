@@ -1,9 +1,14 @@
 # Large language models as oncology world models: code
 
-Code for "Large language models as oncology world models" (Vibert and Kather, 2026). Release v1.0.1: the code of v1.0, under the license below.
-Repository: https://github.com/julienvibert/llm-oncology-world-models
-Code and data: Zenodo, https://doi.org/10.5281/zenodo.24137513
-License: Non-Commercial Software License – Heidelberg University Version 1.0 (NC-SA-UHDV1.0; `LICENSE`), non-commercial use only. The generated data are under CC BY 4.0.
+Code for "Large language models as oncology world models" (Vibert and Kather, 2026), release v1.0.1.
+
+- Repository: https://github.com/julienvibert/llm-oncology-world-models
+- Code and data: Zenodo, https://doi.org/10.5281/zenodo.24137512 (all versions; release v1.0.1:
+  https://doi.org/10.5281/zenodo.24208549)
+- License: Non-Commercial Software License – Heidelberg University Version 1.0 (NC-SA-UHDV1.0; `LICENSE`),
+  non-commercial use only. The generated data are under CC BY 4.0.
+
+Release v1.0.1 contains the code of release v1.0 under this license, which replaces the MIT license of v1.0.
 
 The pipeline asks a large language model (LLM) to write the complete course of a cancer patient, from diagnosis
 to death, as a structured record: a baseline description and a dated list of events (disease, treatment,
@@ -18,6 +23,10 @@ Three files describe the release:
 - `PROVENANCE.md`: models, dates, code commits and checksums of the generated data.
 - `FILE_MANIFEST.tsv`: every file with its purpose and SHA-256 (`SNAPSHOT_MANIFEST.json` gives the hash of
   `FILE_MANIFEST.tsv` itself).
+
+The checksums in `FILE_MANIFEST.tsv` and `SNAPSHOT_MANIFEST.json` are those of release v1.0. Three files differ
+from them: `LICENSE`, `README.md` and `pyproject.toml`, changed for the license of v1.0.1 and, for this README,
+for documentation. All other files are identical to v1.0.
 
 ## 1. Install
 
